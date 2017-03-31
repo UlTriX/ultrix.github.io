@@ -1,0 +1,281 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-5 col-xs-12">
+            <h3>Bloom Consulting</h3>
+
+            <h1><span>Portugal</span>
+                <span class="text-purple">City Brand
+                Ranking ©</span>
+            </h1>
+
+            <h2>2017
+                <img src="img/mp_pt.png" style="width:55%;vertical-align:center">
+            </h2>
+
+            <div class="row-spacer">
+                <a class="btn btn-sm btn-bloom"
+                   ng-href="http://www.bloom-consulting.com/pdf/rankings/Bloom_Consulting_City_Brand_Ranking_Portugal.pdf"
+                   target="_blank">
+                    <i class="glyphicon glyphicon-download-alt"></i> DOWNLOAD</a>
+            </div>
+            <p class="text-info-bloom">Para mais informações sobre a metodologia
+                aplicada e resultados finais faça download
+                do PDF</p>
+        </div>
+
+
+        <div class="col-md-5 col-sm-7 col-xs-12">
+            <div id="map" class="map-container">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <button class="btn btn-bloom zoomBtn" rel="out" title="Reset Zoom"
+                                ng-click="ranking.resetZoom()">
+                            <i class="glyphicon glyphicon-zoom-out"></i>
+                        </button>
+                    </div>
+                    <div class="col-xs-11">
+                        <ui-select ng-model="ranking.municipality" theme="selectize" ng-disabled="disabled">
+                            <ui-select-match placeholder="Seleccione ou pesquise um município na lista...">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="municipality in ranking.municipalities | filter: $select.search">
+                                {{ municipality.name }}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <map data="ranking.data" func="ranking.setMunicipality(municipality)"
+                     selected="ranking.municipality"></map>
+                <div id="infobox" class="info-box">
+                </div>
+            </div>
+            <div>
+                <p class="text-info-bloom">Visualization Partner:
+                    <a href="http://www.viurdata.com"><img src="img/viur-logo-small.png" height="20px"></a>
+                </p>
+            </div>
+        </div>
+
+        <div ng-show="ranking.municipality" class="col-md-4 col-sm-6 col-xs-12">
+            <div class="box">
+                <a ng-href="{{ranking.municipality.url}}" target="_blank">
+                    <section class="municipality">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-3">
+                                <div class="crest">
+                                    <img id="crest" ng-src="{{ranking.municipality.img}}" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-xs-9">
+                                <h4>{{ranking.municipality.name}}</h4>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="national-ranking">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                                <p class="text-uppercase">Ranking Nacional</p>
+
+                                <p class="ranking">{{ranking.municipality.ranking_national}}</p>
+                            </div>
+                        </div>
+                    </section>
+                </a>
+                <section class="regional-ranking">
+                    <div class="row">
+                        <div class="col-sm-8 col-xs-8">
+                            <p class="text-uppercase">Ranking Regional</p>
+
+                            <p class="text-uppercase region"><i class="glyphicon glyphicon-menu-right"></i>{{ranking.municipality.region}}
+                            </p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>
+                                <span class="region-variation">{{ranking.municipality.ranking_region}}</span>
+
+                                <div class="arrows">
+                                    <p class="text-center">
+                                        <i ng-if="ranking.municipality.variation >= 0"
+                                           class="text-green glyphicon glyphicon-triangle-top text-large"></i>
+                                        <i ng-if="ranking.municipality.variation < 0"
+                                           class="text-red glyphicon glyphicon-triangle-bottom text-large"></i>
+                                        <br>{{ranking.municipality.variation}}</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <section class="typology-ranking container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-sm-4 col-xs-4">
+                            <div class="text-center">
+                                <p class="top">{{ranking.municipality.ranking_business}}</p>
+
+                                <p class="middle"><img src="img/icon-business.png" class="img-responsive center-block">
+                                </p>
+
+                                <p class="bottom text-uppercase">Negócios</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 col-xs-4 color-rose">
+                            <div class="text-center">
+                                <p class="top">{{ranking.municipality.ranking_tourism}}</p>
+
+                                <p class="middle"><img src="img/icon-visit.png" class="img-responsive center-block"></p>
+
+                                <p class="bottom text-uppercase">Visitar</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 col-xs-4">
+                            <div class="text-center">
+                                <p class="top">{{ranking.municipality.ranking_qos}}</p>
+
+                                <p class="middle"><img src="img/icon-live.png" class="img-responsive center-block"></p>
+
+                                <p class="bottom text-uppercase">Viver</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="box stats">
+                <section class="digital-demand">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h4 class="stats-header">DIGITAL DEMAND D2 ©</h4>
+
+                            <p class="subtitle">PROCURAS ONLINE</p>
+                        </div>
+                        <div class="col-sm-4 center-block">
+                            <img src="img/digital-demand.jpg" class="img-responsive img-digital-demand">
+                        </div>
+                    </div>
+                </section>
+                <section class="top-keyword">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="">Um dos temas ou "brandtags" mais procurados online sobre o município foi:</p>
+
+                            <p class="keyword">> <span class="text-purple text-uppercase">{{ranking.municipality.brandtag}}</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+                <section class="charts">
+                    <div class="cards">
+                        <div class="card card-left">
+                            <div class="text-center color-rose text-heavy">
+                                <p class="text-uppercase">Brandtag no<br><span class="text-white">Município</span></p>
+                            </div>
+                            <div class="brandtag-ranking">
+                                <div class="position">
+                                    <div class="text-center">
+                                        <p class="sublegend">Posição</p>
+                                    </div>
+                                    <p class="text-center text-heavy text-purple cardinal">
+                                        #{{ ranking.municipality.brandtag_pos_mun}}
+                                    </p>
+                                </div>
+                                <div class="share">
+                                    <div class="text-center">
+                                        <p class="sublegend">Share</p>
+                                    </div>
+                                    <div class="middle">
+                                        <div id="circle1" class="circle"></div>
+                                        <img class="img-responsive center-block" src="img/icon-bars.png">
+
+                                        <p class="text-center result">{{ranking.municipality.share_mun}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card card-right">
+                            <div class="text-center color-rose text-heavy">
+                                <p class="text-uppercase">Brandtag na<br><span class="text-white">Região</span></p>
+                            </div>
+                            <div class="brandtag-ranking">
+                                <div class="position">
+                                    <div class="text-center">
+                                        <p class="sublegend">Posição</p>
+                                    </div>
+                                    <p class="text-center text-heavy text-purple cardinal">
+                                        #{{ ranking.municipality.brandtag_pos_reg}}
+                                    </p>
+                                </div>
+                                <div class="share">
+                                    <div class="text-center">
+                                        <p class="sublegend">Share</p>
+                                    </div>
+                                    <div class="middle">
+                                        <div id="circle2" class="circle"></div>
+                                        <img class="img-responsive center-block" src="img/icon-bars.png">
+
+                                        <p class="text-center result">{{ranking.municipality.share_reg}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                <section class="report">
+                    <div class="row">
+                        <div class="col-sm-7 col-xs-12">
+                            <div>
+                                <p class="top">RELATÓRIO MUNICIPAL</p>
+
+                                <p class="bottom">DIGITAL DEMAND >>></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12">
+                            <a href="mailto:portugal@bloom-consulting.com?subject=Informa%C3%A7%C3%A3o%20Digital%20Demand%20munic%C3%ADpios%20de%20Portugal&body=Gostaria%20de%20receber%20informa%C3%A7%C3%A3o%20sobre%20a%20Ferramenta%20Digital%20Demand%20da%20Bloom%20Consulting%2C%20dispon%C3%ADvel%20para%20munic%C3%ADpios%20e%20regi%C3%B5es.%0A%0APOR%20FAVOR%20INDICAR%0ANome%3A%20%0AEmpresa%3A">
+                                <img src="img/btn-saiba-mais.jpg" class="img-btn img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="row row-spacer">
+                <div class="col-12 col-sm-4 col-xs-12">
+                    <a ng-href="http://www.bloom-consulting.com/pdf/pt/d2/BC_Digital_Demand_PT.pdf" target="_blank"
+                       class="btn btn-sm btn-bloom"><i class="glyphicon glyphicon-download-alt"></i> DOWNLOAD
+                    </a>
+                </div>
+                <div class="col-12 col-sm-8 col-xs-12">
+                    <p class="text-info-bloom no-margin">A Bloom Consulting através da sua
+                        ferramenta <b>Digital Demand D2©</b>
+                        pode oferecer uma grande quantidade de informação relativas a
+                        procura online sobre um Pais,
+                        Região ou Município, faça download
+                        da nossa Brochura D2© para saber
+                        mais.</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script>
+
+    $('#circle1').circleProgress({
+        value: 0.1,
+        size: 65,
+        startAngle: Math.PI / 2,
+        fill: {color: "#8f4e97"}
+    });
+
+    $('#circle2').circleProgress({
+        value: 0.1,
+        size: 65,
+        startAngle: Math.PI / 2,
+        fill: {color: "#8f4e97"}
+    });
+
+</script>
